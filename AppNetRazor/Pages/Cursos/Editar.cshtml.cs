@@ -17,6 +17,9 @@ public class Editar : PageModel
     [BindProperty] 
     public Curso Curso { get; set; }
     
+    [TempData]
+    public string Mensaje { get; set; }
+    
     public async Task OnGet(int id)
     {
         Curso = await _contexto.Cursos.FindAsync(id);
@@ -33,9 +36,9 @@ public class Editar : PageModel
             cursoDesdeDB.Precio = Curso.Precio;
             
             await _contexto.SaveChangesAsync();
+            Mensaje = "Curso editado correctamente";
             return RedirectToPage("Index");
         }
-
         return RedirectToPage();
     }
 }

@@ -17,6 +17,9 @@ public class Crear : PageModel
     [BindProperty] 
     public Curso Curso { get; set; }
     
+    [TempData]
+    public string Mensaje { get; set; }
+    
     public void OnGet()
     {
     }
@@ -32,6 +35,7 @@ public class Crear : PageModel
 
         _contexto.Add(Curso);
         await _contexto.SaveChangesAsync();
+        Mensaje = "Curso creado correctamente";
         return RedirectToPage("Index");
     }
 }
